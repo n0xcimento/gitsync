@@ -2,6 +2,7 @@ That is a simple script to synchronize my git repositories, in automatic form, w
 
 Usage:
 
+```
 gitsync [-lhv] [--pull] [--push MSG] [--dir DIR...]
 
     --pull  Faz download das mudanças do repositório remoto e faz merge.
@@ -12,3 +13,4 @@ gitsync [-lhv] [--pull] [--push MSG] [--dir DIR...]
     -l      Mostra a lista de diretórios que possuem mudanças
     -h      Mostra a tela de ajuda e sai
     -v      Mostra a versão do programa e sai
+```
