@@ -19,6 +19,7 @@ listar_dir_mudancas=0           # listar os diretórios que possuem mudanças?
 baixar_mudancas_remotas=0       # baixar mudanças do repositório remoto?
 mandar_mudancas_locais=0        # mandar as mudanças locais para o repositório remoto?
 diretorios_especificos=0        # verificar por mudanças apenas nos diretóios especificados?
+mostrar_msg_uso=0               # mostrar a mensagem de uso, do programa?
 
 
 
@@ -46,6 +47,12 @@ dirMudancas=""      # Lista com os diretórios que há mudanças
 
 MSG=""      # MSG para o commit
 
+
+# Nenhuma opção passada
+if [ -z "$1" ]
+then
+    mostrar_msg_uso=1
+fi
 
 # Tratamento das opções de linha de comando
 while test -n "$1"
@@ -86,8 +93,7 @@ do
         ;;
 
         -h)
-            echo "$MENSAGEM_USO"
-            exit 1
+            mostrar_msg_uso=1
         ;;
 
         -v)
@@ -108,9 +114,17 @@ do
 done
 
 
+# Mostra a mensagem de uso, caso seja passada a opção -h ou nenhuma opção
+if [ "$mostrar_msg_uso" = 1 ]
+then
+    echo "$MENSAGEM_USO"
+    exit 1
+fi
+
+
 # Pega os diretórios que possuem mudanças ou possui arquivos que não foram rastreados pelo git
 for dir in $dirList; do
-    git -C "$HOME/$dir" status | egrep -qi "(not staged|untracked)"
+    git -C "`pwd`/$dir" status | egrep -qi "(not staged|untracked)"
 
     if test "$?" = 0
     then
