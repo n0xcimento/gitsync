@@ -149,9 +149,9 @@ if test "$mandar_mudancas_locais" = 1
 then
     for dir in $dirMudancas
     do
-        git -C "$HOME/$dir" add .
-        git -C "$HOME/$dir" commit -m "$MSG"
-        git -C "$HOME/$dir" push
+        git -C "`pwd`/$dir" add .
+        git -C "`pwd`/$dir" commit -m "$MSG"
+        git -C "`pwd`/$dir" push
     done
 fi
 
@@ -162,6 +162,6 @@ if test "$baixar_mudancas_remotas" = 1
 then
     for dir in $dirList
     do
-        git -C "$HOME/$dir" pull
+        git -C "`pwd`/$dir" pull
     done
 fi
